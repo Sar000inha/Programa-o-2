@@ -1,4 +1,8 @@
-#
+#PROGRAMAÇÃO 2 
+#Professor: Fabrício Almeida
+#Alunas: Alícia Maia e Sarah Cabral
+#Turma: Engenharia da Computação/2020.04
+
 agenda=[]
 #contatos={}
 #metodo é um verbo
@@ -17,15 +21,29 @@ class Agenda():
         self.contatos["email"]=input("Digite o email: ")
         agenda.append(self.contatos)
         print("")
+        
+        #Código que retorna para o menu
+        retorno = Menu()
+        retorno.exibir_opcoes()
+        x=input("Digite a opção: ")
+        retorno.setEscolha(x)
+        retorno.destino()
 
     def exluir(self):
         print("Escolha o contato que você gostaria de apagar:")
         lista=Agenda()
-        lista.listar()
+        lista.listar_excluir_modificar()
         self.id_contato = int(input("Contato para editar: "))
         del agenda[self.id_contato]
         print("")
-    
+        
+        #Código que retorna para o menu
+        retorno = Menu()
+        retorno.exibir_opcoes()
+        x=input("Digite a opção: ")
+        retorno.setEscolha(x)
+        retorno.destino()
+
     def listar(self):
         for index, self.contatos in enumerate(agenda):
             print("Contato "+str(index)+":")
@@ -34,11 +52,25 @@ class Agenda():
             print("Telefone: "+self.contatos["telefone"])
         print("")
         
+        #Código que retorna para o menu
+        retorno = Menu()
+        retorno.exibir_opcoes()
+        x=input("Digite a opção: ")
+        retorno.setEscolha(x)
+        retorno.destino()
     
-    def modificar (self):
+    def listar_excluir_modificar(self):
+        for index, self.contatos in enumerate(agenda):
+            print("Contato "+str(index)+":")
+            print("Nome completo: "+self.contatos["nome"])
+            print("Email: "+self.contatos["email"])
+            print("Telefone: "+self.contatos["telefone"])
+        print("")
+        
+    def modificar(self):
         #mostrar o método listar  
         lista=Agenda()
-        lista.listar()
+        lista.listar_excluir_modificar()
         print("Escolha o contato que você gostaria de editar:")
         self.id_contato = int(input("Contato para editar: "))
         if self.id_contato !="":
@@ -54,6 +86,13 @@ class Agenda():
             if self.novoTelefone != "":
                 agenda[self.id_contato]["telefone"] = self.novoTelefone
         print("")
+        
+        #Código que retorna para o menu
+        retorno = Menu()
+        retorno.exibir_opcoes()
+        x=input("Digite a opção: ")
+        retorno.setEscolha(x)
+        retorno.destino()
 
     def encontrar (self):
         self.termo = input("Digite o termo que você gostaria de buscar: ")
@@ -64,46 +103,59 @@ class Agenda():
                 print("Email: "+self.contatos["email"])
                 print("Telefone: "+self.contatos["telefone"])
         print("")
-    
-    #metodos
-    #adicionar 
-    #excluir 
-    #listar
-    #modificar 
-
-
-class Menu():
-    def __init__(self,escolha):
-        self.escolha=escolha
-        pass
-    def funcoes(self):
-        pass
-    #metodos
-    #mostar as funções 
-
-    
-class Contato():
-    def __init__(self,nome,telefone,email):
-        self.nome=nome
-        self.telefone=telefone
-        self.email=email
-    
-    def informacoes(self):
-        print("nome:"+self.nome+"\n telefone:"+ self.telefone+"\n email:"+self.email)
         
-    #atributos
-    #nome 
-    #email
-    #telefone
-    
-    #metodos
+        #Código que retorna para o menu
+        retorno = Menu()
+        retorno.exibir_opcoes()
+        x=input("Digite a opção: ")
+        retorno.setEscolha(x)
+        retorno.destino()
+        
+class Menu():
 
-#testando funções
-contato1=Contato("rodrigo","987645327","rogrigo@ufpa.com")
-contato1.informacoes()
-contato2=Agenda()
-contato2.adicionar()
-contato2.modificar()
-contato2.listar()
-#contato2.exluir()
-#contato2.listar()
+    def getEscolha(self):
+        return self.escolha
+
+    def setEscolha(self, opcao):
+        self.escolha = opcao
+    
+    def exibir_opcoes(self):
+        print("Escolha uma das opções abaixo:")
+        print("1 - Incluir contato")
+        print("2 - Buscar contato")
+        print("3 - Editar contato")
+        print("4 - Excluir contato")
+        print("5 - Listar contatos")
+        print("6 - Sair")
+            
+    def destino(self):
+        #Encaminha de acordo com a escolha do usuário
+        produto = Agenda()
+        if self.escolha == "1":
+           produto.adicionar()
+        elif self.escolha == "2":
+            produto.encontrar()
+        elif self.escolha == "3":
+            produto.modificar()
+        elif self.escolha == "4":
+            produto.excluir()
+        elif self.escolha == "5":
+            produto.listar()
+        elif self.escolha == "6":
+            print("Bye bye :)")
+        else:
+            #Código que retorna para o menu
+            print("Opção inválida, tente novamente!")
+            p1.exibir_opcoes()
+            x=input("Digite a opção: ")
+            p1.setEscolha(x)
+            p1.destino()
+            
+#Exibição
+p1 = Menu() 
+p1.exibir_opcoes()
+x=input("Digite a opção: ")
+p1.setEscolha(x)
+p1.destino()
+
+
